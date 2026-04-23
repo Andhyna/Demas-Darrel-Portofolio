@@ -85,7 +85,7 @@ window.addEventListener("click", (e) => {
     }
 });
 
-// --- Lightbox (Image Pop-up) Logic ---
+// --- Lightbox (Image Pop-up) Logic FIXED ---
 const lightbox = document.getElementById('image-lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const lightboxClose = document.querySelector('.lightbox-close');
@@ -93,13 +93,13 @@ const galleryItems = document.querySelectorAll('.gallery-item');
 
 // Buka lightbox saat gambar diklik
 galleryItems.forEach(item => {
-    item.addEventListener('click', () => {
-        // Ambil URL gambar dari CSS background-image
-        const bgImage = window.getComputedStyle(item).backgroundImage;
-        // Bersihkan teks URL (contoh: url("gambar.jpg") -> gambar.jpg)
-        const imageUrl = bgImage.replace(/(url\(|\)|"|')/g, '');
+    item.addEventListener('click', (e) => {
+        e.stopPropagation(); // Biar klik ga bocor ke elemen di baliknya
 
-        if (imageUrl && imageUrl !== 'none') {
+        // Ambil URL langsung dari atribut data-src HTML (Aman & Anti Error)
+        const imageUrl = item.getAttribute('data-src');
+
+        if (imageUrl) {
             lightboxImg.src = imageUrl;
             lightbox.style.display = 'flex';
             setTimeout(() => {
@@ -110,7 +110,8 @@ galleryItems.forEach(item => {
 });
 
 // Tutup lightbox via tombol X
-lightboxClose.addEventListener('click', () => {
+lightboxClose.addEventListener('click', (e) => {
+    e.stopPropagation();
     lightbox.classList.remove('show');
     setTimeout(() => {
         lightbox.style.display = 'none';
