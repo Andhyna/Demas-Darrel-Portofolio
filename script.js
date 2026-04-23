@@ -84,3 +84,47 @@ window.addEventListener("click", (e) => {
         }, 300);
     }
 });
+
+// --- Lightbox (Image Pop-up) Logic ---
+const lightbox = document.getElementById('image-lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxClose = document.querySelector('.lightbox-close');
+const galleryItems = document.querySelectorAll('.gallery-item');
+
+// Buka lightbox saat gambar diklik
+galleryItems.forEach(item => {
+    item.addEventListener('click', () => {
+        // Ambil URL gambar dari CSS background-image
+        const bgImage = window.getComputedStyle(item).backgroundImage;
+        // Bersihkan teks URL (contoh: url("gambar.jpg") -> gambar.jpg)
+        const imageUrl = bgImage.replace(/(url\(|\)|"|')/g, '');
+
+        if (imageUrl && imageUrl !== 'none') {
+            lightboxImg.src = imageUrl;
+            lightbox.style.display = 'flex';
+            setTimeout(() => {
+                lightbox.classList.add('show');
+            }, 10);
+        }
+    });
+});
+
+// Tutup lightbox via tombol X
+lightboxClose.addEventListener('click', () => {
+    lightbox.classList.remove('show');
+    setTimeout(() => {
+        lightbox.style.display = 'none';
+        lightboxImg.src = ''; // Bersihkan src
+    }, 300);
+});
+
+// Tutup lightbox jika user klik area kosong di luar gambar
+lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+        lightbox.classList.remove('show');
+        setTimeout(() => {
+            lightbox.style.display = 'none';
+            lightboxImg.src = ''; // Bersihkan src
+        }, 300);
+    }
+});
