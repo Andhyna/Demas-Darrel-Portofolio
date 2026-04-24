@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
             'Web Developer.',
             'UI/UX Enthusiast.',
             'Game Developer.',
-            'an a Information Systems Singaperbangsa Karawang University Student.',
         ],
         typeSpeed: 55,
         backSpeed: 30,
