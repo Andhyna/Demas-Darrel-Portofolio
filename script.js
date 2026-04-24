@@ -1,43 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ─── Clean URL Navigation ────────────────────────────────
-
-    // 1. Ganti URL & Scroll pas menu diklik
+    // --- 1. Handle Klik Menu biar URL jadi Clean 
     document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
         link.addEventListener('click', function (e) {
-            e.preventDefault(); // Stop efek lompat bawaan HTML
+            const href = this.getAttribute('href');
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const targetId = href.substring(1);
+                const section = document.getElementById(targetId);
 
-            const targetId = this.getAttribute('href'); // Dapetnya "#home" atau "#about"
-            const cleanPath = targetId.substring(1);    // Dapetnya "home" atau "about"
-            const section = document.querySelector(targetId);
-
-            if (section) {
-                // Scroll mulus ke section yang dituju
-                section.scrollIntoView({ behavior: 'smooth' });
-
-                // Ubah URL di address bar tanpa ngereload
-                window.history.pushState(null, null, '/' + cleanPath);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                    window.history.pushState(null, null, '/' + targetId);
+                }
             }
         });
     });
 
-    // 2. Handle pas user ngetik URL langsung (misal: buka link .../about dari WhatsApp)
-    window.addEventListener('load', () => {
-        const path = window.location.pathname.substring(1); // Ngambil kata "about" dari URL
-        if (path) {
-            const targetSection = document.getElementById(path);
-            if (targetSection) {
-                // Kalau ada ID-nya, langsung otomatis scroll ke sana
-                setTimeout(() => {
-                    targetSection.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
-            }
+    const currentPath = window.location.pathname.substring(1);
+    if (currentPath && currentPath !== 'index.html') {
+        const targetSection = document.getElementById(currentPath);
+        if (targetSection) {
+            setTimeout(() => {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }, 500);
         }
-    });
-
-
-
-
+    }
 
     // ─── Typed.js ────────────────────────────────────
     new Typed('#typed', {
