@@ -678,8 +678,17 @@ a {
     font-size: 1rem;
 }
 
+.skills-sub {
+    margin-bottom: 1.2rem;
+    margin-top: 2.5rem;  
+}
+
+.skills-two-col > div > .skills-sub:first-child {
+    margin-top: 0;
+}
+
 /* ================================
-   PROJECTS SECTION
+    PROJECTS SECTION
 ================================ */
 .projects-list {
     display: flex;
