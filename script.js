@@ -1,131 +1,211 @@
-// Initialize AOS (Animate on Scroll)
-AOS.init({
-    duration: 800,
-    once: true,
-    easing: 'ease-out-quad'
-});
+document.addEventListener('DOMContentLoaded', () => {
 
-// Custom Cursor Logic
-const cursor = document.querySelector('.cursor');
-const follower = document.querySelector('.cursor-follower');
+    // ─── Typed.js ────────────────────────────────────
+    new Typed('#typed', {
+        strings: [
+            'Web Developer.',
+            'UI/UX Enthusiast.',
+            'Game Developer.',
+            'Information Systems Singaperbangsa Karawang University Student.',
+        ],
+        typeSpeed: 55,
+        backSpeed: 30,
+        backDelay: 2000,
+        loop: true,
+        cursorChar: '_',
+    });
 
-document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
+    // ─── Custom Cursor ────────────────────────────────
+    const cursor = document.getElementById('cursor');
 
-    setTimeout(() => {
-        follower.style.left = e.clientX - 10 + 'px';
-        follower.style.top = e.clientY - 10 + 'px';
-    }, 50);
-});
+    if (window.matchMedia('(pointer: fine)').matches) {
+        let mouseX = -100, mouseY = -100;
+        let curX = -100, curY = -100;
+        let rafId;
 
-// Typed.js for Dynamic Intro
-new Typed('#typing', {
-    strings: [
-        'Student at Singaperbangsa Karawang University.',
-        'Web Developer.',
-        'UI/UX Designer.'
-    ],
-    typeSpeed: 60,
-    backSpeed: 40,
-    backDelay: 1500, // Menambahkan jeda sebelum teks dihapus agar lebih nyaman dibaca
-    loop: true
-});
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
 
-// Hamburger Menu Logic
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('nav-menu');
+        document.addEventListener('mouseleave', () => cursor.classList.add('cursor-hidden'));
+        document.addEventListener('mouseenter', () => cursor.classList.remove('cursor-hidden'));
 
-hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    hamburger.classList.toggle('open');
-});
+        // Smooth cursor with lerp
+        function lerp(a, b, n) { return (1 - n) * a + n * b; }
 
-// Sticky Navbar Scroll Effect
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.style.padding = '10px 0';
-        navbar.style.background = 'rgba(5, 5, 5, 0.95)';
-    } else {
-        navbar.style.padding = '20px 0';
-        navbar.style.background = 'rgba(5, 5, 5, 0.8)';
+        function animCursor() {
+            curX = lerp(curX, mouseX, 0.18);
+            curY = lerp(curY, mouseY, 0.18);
+            cursor.style.left = curX + 'px';
+            cursor.style.top = curY + 'px';
+            rafId = requestAnimationFrame(animCursor);
+        }
+
+        animCursor();
+
+        // Hover state on interactive elements
+        const hoverTargets = document.querySelectorAll(
+            'a, button, .project-item, .skill-pill, .gallery-item'
+        );
+
+        hoverTargets.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
+        });
     }
-});
 
-// --- Modal (Pop-up) Logic untuk Dewarigama ---
-const modal = document.getElementById("dewarigama-modal");
-const triggerBtn = document.getElementById("dewarigama-trigger");
-const closeBtn = document.querySelector(".close-btn");
+    // ─── Navbar Scroll ────────────────────────────────
+    const navbar = document.getElementById('navbar');
 
-// Fungsi untuk membuka modal
-triggerBtn.addEventListener("click", () => {
-    modal.style.display = "flex";
-    // Sedikit delay agar transisi CSS berjalan mulus
+    const navObserver = new IntersectionObserver(([entry]) => {
+        navbar.classList.toggle('scrolled', !entry.isIntersecting);
+    }, { threshold: 0.1 });
+
+    navObserver.observe(document.getElementById('home'));
+
+    // ─── Hamburger Menu ───────────────────────────────
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        mobileNav.classList.toggle('open');
+    });
+
+    // Close mobile nav on link click
+    document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('open');
+            mobileNav.classList.remove('open');
+        });
+    });
+
+    // ─── Scroll Reveal ────────────────────────────────
+    const revealElements = document.querySelectorAll('.reveal, .reveal-up, .reveal-line');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const delay = el.dataset.delay ? parseInt(el.dataset.delay) : 0;
+
+                setTimeout(() => {
+                    el.style.setProperty('--delay', delay + 'ms');
+                    el.classList.add('visible');
+                }, 0);
+
+                revealObserver.unobserve(el);
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Trigger hero reveals immediately
     setTimeout(() => {
-        modal.classList.add("show");
-    }, 10);
-});
+        document.querySelectorAll('.hero .reveal, .hero .reveal-up, .hero .reveal-line')
+            .forEach(el => {
+                const delay = el.dataset.delay ? parseInt(el.dataset.delay) : 0;
+                el.style.setProperty('--delay', delay + 'ms');
+                el.classList.add('visible');
+                revealObserver.unobserve(el);
+            });
+    }, 100);
 
-// Fungsi untuk menutup modal via tombol silang (X)
-closeBtn.addEventListener("click", () => {
-    modal.classList.remove("show");
-    setTimeout(() => {
-        modal.style.display = "none";
-    }, 300); // Sesuaikan dengan durasi transisi di CSS
-});
+    // ─── Modal Logic ──────────────────────────────────
+    const modal = document.getElementById('dewarigama-modal');
+    const modalClose = document.getElementById('modal-close');
+    const modalBg = modal.querySelector('.modal-backdrop');
+    const trigger = document.getElementById('dewarigama-trigger');
 
-// Fungsi untuk menutup modal jika user klik area gelap di luar kotak konten
-window.addEventListener("click", (e) => {
-    if (e.target === modal) {
-        modal.classList.remove("show");
-        setTimeout(() => {
-            modal.style.display = "none";
-        }, 300);
+    function openModal() {
+        modal.style.display = 'flex';
+        requestAnimationFrame(() => modal.classList.add('open'));
+        document.body.style.overflow = 'hidden';
     }
-});
 
-// --- Lightbox (Image Pop-up) Logic FIXED ---
-const lightbox = document.getElementById('image-lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
-const lightboxClose = document.querySelector('.lightbox-close');
-const galleryItems = document.querySelectorAll('.gallery-item');
+    function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(() => { modal.style.display = 'none'; }, 500);
+    }
 
-// Buka lightbox saat gambar diklik
-galleryItems.forEach(item => {
-    item.addEventListener('click', (e) => {
-        e.stopPropagation(); // Biar klik ga bocor ke elemen di baliknya
+    trigger.addEventListener('click', openModal);
+    modalClose.addEventListener('click', closeModal);
+    modalBg.addEventListener('click', closeModal);
 
-        // Ambil URL langsung dari atribut data-src HTML (Aman & Anti Error)
-        const imageUrl = item.getAttribute('data-src');
-
-        if (imageUrl) {
-            lightboxImg.src = imageUrl;
-            lightbox.style.display = 'flex';
-            setTimeout(() => {
-                lightbox.classList.add('show');
-            }, 10);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+            closeLightbox();
         }
     });
-});
 
-// Tutup lightbox via tombol X
-lightboxClose.addEventListener('click', (e) => {
-    e.stopPropagation();
-    lightbox.classList.remove('show');
-    setTimeout(() => {
-        lightbox.style.display = 'none';
-        lightboxImg.src = ''; // Bersihkan src
-    }, 300);
-});
+    // ─── Lightbox Logic ───────────────────────────────
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
 
-// Tutup lightbox jika user klik area kosong di luar gambar
-lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) {
-        lightbox.classList.remove('show');
+    function openLightbox(src) {
+        lightboxImg.src = src;
+        lightbox.style.display = 'flex';
+        requestAnimationFrame(() => lightbox.classList.add('open'));
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
         setTimeout(() => {
             lightbox.style.display = 'none';
-            lightboxImg.src = ''; // Bersihkan src
-        }, 300);
+            lightboxImg.src = '';
+        }, 400);
     }
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const src = item.getAttribute('data-src');
+            if (src) openLightbox(src);
+        });
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    // ─── Smooth Section Numbers ───────────────────────
+    // Subtle parallax on hero decorative number
+    const heroNum = document.querySelector('.hero-number');
+    if (heroNum) {
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY;
+            heroNum.style.transform = `translateY(${y * 0.15}px)`;
+        }, { passive: true });
+    }
+
+    // ─── Active Nav Link Highlighting ─────────────────
+    const sections = document.querySelectorAll('[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => {
+                    link.style.color = '';
+                    if (link.getAttribute('href') === '#' + entry.target.id) {
+                        link.style.color = 'var(--text)';
+                    }
+                });
+            }
+        });
+    }, { threshold: 0.5 });
+
+    sections.forEach(s => sectionObserver.observe(s));
+
 });

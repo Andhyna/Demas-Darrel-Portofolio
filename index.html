@@ -4,200 +4,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Demas Darrel | Portofolio</title>
-
+    <title>Demas Darrel — Portfolio</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="dark-mode">
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
+<body>
 
-    <div class="bg-gradient-1"></div>
-    <div class="bg-gradient-2"></div>
+    <div class="cursor" id="cursor"></div>
 
-    <nav class="navbar">
-        <div class="container nav-wrapper">
-            <a href="#" class="nav-logo">Demas Darrel<span>.</span></a>
-            <div class="nav-menu" id="nav-menu">
-                <a href="#home">Home</a>
-                <a href="#tentang">Tentang</a>
-                <a href="#skill">Skill</a>
-                <a href="#proyek">Proyek</a>
-                <a href="#kontak" class="nav-cta">Let's Talk</a>
+    <div class="noise"></div>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="#home" class="nav-logo">DD<span>.</span></a>
+            <div class="nav-links" id="nav-links">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skill</a>
+                <a href="#projects" class="nav-link">Project</a>
+                <a href="#contact" class="nav-cta">Discuss →</a>
             </div>
-            <div class="hamburger" id="hamburger">
-                <span></span><span></span><span></span>
-            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span>
+            </button>
         </div>
     </nav>
 
+    <div class="mobile-nav" id="mobile-nav">
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#skills" class="mobile-link">Skill</a>
+        <a href="#projects" class="mobile-link">Project</a>
+        <a href="#contact" class="mobile-link">contact</a>
+    </div>
+
     <main>
-        <section id="home" class="hero-section">
-            <div class="container">
-                <div class="hero-badge" data-aos="fade-down">
-                    <span class="pulse"></span> Tersedia untuk Kolaborasi
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <div class="hero-eyebrow reveal">
+                    <span class="dot"></span>
+                    Open collaborations
                 </div>
-                <h1 class="hero-title" data-aos="fade-up">
-                    Crafting <span class="text-gradient">Digital</span> <br>
-                    Experiences.
+                <h1 class="hero-title">
+                    <span class="reveal-line"><em>Crafting</em></span>
+                    <span class="reveal-line">Digital</span>
+                    <span class="reveal-line">Experiences</span>
                 </h1>
-                <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
-                    I'm <span id="typing"></span> <br>
-                    Mahasiswa Semester 4 Sistem Informasi di <b>Universitas Singaperbangsa Karawang</b>. Berfokus pada
-                    pengembangan aplikasi berkinerja tinggi dan desain antarmuka yang bermakna.
-                </p>
-            </div>
-        </section>
-
-        <section id="tentang" class="bento-section">
-            <div class="container">
-                <div class="bento-grid">
-                    <div class="bento-item item-large" data-aos="fade-up">
-                        <div class="card-content">
-                            <span class="card-tag">Profil</span>
-                            <h2>Tentang Saya</h2>
-                            <p class="paragraph-spacing">Halo! Saya <b>Demas Darrel Putra Andhyna</b>, Mahasiswa
-                                Semester 4 Sistem Informasi di <b>Universitas Singaperbangsa Karawang</b>.</p>
-                            <p class="paragraph-spacing">Saya adalah seorang Fullstack Developer yang antusias dengan
-                                Game Development. Fokus saya adalah menciptakan aplikasi web yang kencang, aman, dan
-                                punya interaksi yang smooth.</p>
-                        </div>
-                    </div>
-
-                    <div id="skill" class="bento-item item-medium" data-aos="fade-up" data-aos-delay="100">
-                        <div class="card-content">
-                            <span class="card-tag">Keahlian</span>
-                            <div class="skill-icons">
-                                <i class="fab fa-python" title="Python"></i>
-                                <i class="fab fa-js" title="JavaScript"></i>
-                                <i class="fab fa-java" title="Java"></i>
-                                <i class="fab fa-html5" title="HTML5"></i>
-                                <i class="fab fa-css3-alt" title="CSS3"></i>
-                                <i class="fab fa-figma" title="Figma"></i>
-                            </div>
-                            <p class="small-text paragraph-spacing">Mahir dalam Python, Java, JS, serta tools kreatif
-                                seperti After Effects dan CapCut untuk konten visual.</p>
-                        </div>
-                    </div>
-
-                    <div class="bento-item item-small" data-aos="fade-up" data-aos-delay="200">
-                        <div class="card-content">
-                            <h3>Python Expert</h3><span></span>
-                            <p>Berpengalaman membangun logika kompleks seperti pada proyek game romansa
-                                <b>Dewarigama</b>.
-                            </p>
-                        </div>
-                    </div>
+                <div class="hero-meta reveal">
+                    <p class="typed-wrap">I'm a <span id="typed"></span></p>
+                    <p class="hero-desc">Information Systems student at <strong>Singaperbangsa Karawang
+                            University</strong> — Fullstack Developer with a strong passion for user interface design,
+                        blending solid programming logic with intuitive and user-friendly experiences.</p>
+                </div>
+                <div class="hero-scroll reveal">
+                    <span>Scroll</span>
+                    <div class="scroll-line"></div>
                 </div>
             </div>
+            <div class="hero-number">01</div>
         </section>
 
-        <section id="proyek" class="project-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Proyek <span>Pilihan</span></h2>
+        <section id="about" class="section about-section">
+            <div class="section-label">Profile</div>
+            <div class="about-grid">
+                <div class="about-left">
+                    <h2 class="section-title reveal-up">About<br><em>Me</em></h2>
                 </div>
-                <div class="project-grid">
-                    <div class="project-card clickable" id="dewarigama-trigger" data-aos="zoom-in">
-                        <div class="pj-overlay"></div>
-                        <div class="pj-content">
-                            <h3>Dewarigama</h3>
-                            <p>Visual Novel romansa berbasis Python untuk kompetisi nasional. <br><br><i>(Klik untuk
-                                    detail)</i></p>
-                            <div class="pj-tags"><span>Python</span> <span>Ren'Py</span></div>
-                        </div>
+                <div class="about-right">
+                    <p class="about-text reveal-up" data-delay="100">I'm <strong>Demas Darrel Putra Andhyna</strong>,
+                        Information Systems student at <strong>Universitas Singaperbangsa Karawang (UNSIKA)</strong>
+                        with a strong passion for coding since high school.</p>
+                    <p class="about-text reveal-up" data-delay="200">As a <em>Fullstack</em>, I specialize in building
+                        end-to-end systems, blending solid programming logic with clean and intuitive design to deliver
+                        optimized and responsive applications.</p>
+                    <div class="about-info-row reveal-up" data-delay="280">
                     </div>
-                    <div class="project-card" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="pj-overlay"></div>
-                        <div class="pj-content">
-                            <h3>Content Creation</h3>
-                            <p>Optimasi streaming setup & engagement di TikTok/YouTube.</p>
-                            <div class="pj-tags"><span>OBS Studio</span> <span>Tiktok Studio</span></div>
+                    <div class="about-stat-row reveal-up" data-delay="360">
+                        <div class="stat-item">
+                            <span class="stat-num">2024</span>
+                            <span class="stat-label">Starting College</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-num">2+</span>
+                            <span class="stat-label">Project Completed </span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-num">10+</span>
+                            <span class="stat-label">Tools SKills</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="kontak" class="bento-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Mari <span>Berdiskusi</span></h2>
-                </div>
-                <div class="bento-item" data-aos="fade-up">
-                    <div class="contact-box">
-                        <div class="contact-text">
-                            <h3>Punya ide proyek atau tawaran menarik?</h3>
-                            <p class="paragraph-spacing">Jangan ragu untuk menghubungi saya. Saya selalu terbuka untuk
-                                mendiskusikan <em>web development</em>, kolaborasi kreatif, atau sekadar berbincang
-                                tentang teknologi.</p>
+        <section id="skills" class="section skills-section">
+            <div class="section-label">skills</div>
+            <div class="skills-two-col">
+                <div>
+                    <h3 class="skills-sub reveal-up">Program Languages</h3>
+                    <div class="skills-grid">
+                        <div class="skill-pill reveal-up" data-delay="0"><i class="fab fa-python"></i> Python</div>
+                        <div class="skill-pill reveal-up" data-delay="50"><i class="fab fa-js"></i> JavaScript</div>
+                        <div class="skill-pill reveal-up" data-delay="100"><i class="fab fa-java"></i> Java</div>
+                        <div class="skill-pill reveal-up" data-delay="150"><span class="skill-icon-text">C</span> C
+                            Language</div>
+                        <div class="skill-pill reveal-up" data-delay="200"><span class="skill-icon-text">C++</span> C++
                         </div>
-                        <div class="contact-actions">
-                            <a href="https://wa.me/6281380715877" target="_blank" class="btn-contact wa-btn">
-                                <i class="fab fa-whatsapp"></i> WhatsApp
+                        <div class="skill-pill reveal-up" data-delay="250"><i class="fab fa-html5"></i> HTML5</div>
+                        <div class="skill-pill reveal-up" data-delay="300"><i class="fab fa-css3-alt"></i> CSS3</div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="skills-sub reveal-up" data-delay="50">Creative &amp; Tools</h3>
+                    <div class="skills-grid">
+                        <div class="skill-pill reveal-up" data-delay="80"><i class="fab fa-figma"></i> Figma</div>
+                        <div class="skill-pill reveal-up" data-delay="130"><i class="fas fa-palette"></i> Canva</div>
+                        <div class="skill-pill reveal-up" data-delay="180"><i class="fas fa-video"></i> After Effects
+                        </div>
+                        <div class="skill-pill reveal-up" data-delay="230"><i class="fas fa-film"></i> CapCut</div>
+                        <div class="skill-pill reveal-up" data-delay="280"><i class="fas fa-camera"></i> Lightroom</div>
+                        <div class="skill-pill reveal-up" data-delay="330"><i class="fas fa-broadcast-tower"></i> OBS
+                            Studio</div>
+                    </div>
+                    <h3 class="skills-sub reveal-up" data-delay="100" style="margin-top:2rem">Language</h3>
+                    <div class="skills-grid">
+                        <div class="skill-pill reveal-up" data-delay="120"><i class="fas fa-language"></i> Indonesia —
+                            Native</div>
+                        <div class="skill-pill reveal-up" data-delay="170"><i class="fas fa-language"></i> English —
+                            Basic</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section projects-section">
+            <div class="section-label">Project</div>
+            <h2 class="section-title reveal-up">Selected<br><em>Project</em></h2>
+            <div class="projects-list">
+                <div class="project-item reveal-up" id="dewarigama-trigger" data-delay="0">
+                    <div class="project-index">01</div>
+                    <div class="project-info">
+                        <h3 class="project-name">Dewarigama</h3>
+                        <p class="project-desc">A romance visual novel developed using Python and the Ren’Py framework
+                            as part of a school technology engineering project, featuring an engaging storyline.</p>
+                        <div class="project-tags">
+                            <span>Python</span>
+                            <span>Ren'Py</span>
+                        </div>
+                    </div>
+                    <div class="project-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="project-hover-bg"></div>
+                </div>
+
+                <section id="contact" class="section contact-section">
+                    <div class="section-label">contact</div>
+                    <div class="contact-inner">
+                        <h2 class="contact-title reveal-up">Let's<br><em>Discuss</em></h2>
+                        <p class="contact-sub reveal-up" data-delay="100">Have an idea or exciting opportunity? I’m
+                            always open
+                            to discussing web development, creative collaborations, or just talking about technology.
+                        </p>
+                        <div class="contact-links reveal-up" data-delay="200">
+                            <a href="https://wa.me/6281380715877" target="_blank" class="contact-btn">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>WhatsApp</span>
                             </a>
-                            <a href="mailto:demasdarrel.home@gmail.com" class="btn-contact email-btn">
-                                <i class="fas fa-envelope"></i> Email Saya
+                            <a href="mailto:demasdarrel.home@gmail.com" class="contact-btn secondary">
+                                <i class="fas fa-envelope"></i>
+                                <span>Email</span>
                             </a>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <div id="dewarigama-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn">&times;</span>
-                <span class="card-tag">Detail Proyek</span>
-                <h2 style="margin-top: 10px; margin-bottom: 20px;">Dewarigama</h2>
-
-                <p class="paragraph-spacing">Dewarigama adalah Visual Novel romansa berbasis Python menggunakan
-                    framework Ren'Py. Game ini dibuat khusus untuk kompetisi nasional.</p>
-
-                <div class="modal-gallery">
-                    <div class="gallery-item" data-src="dokumentasi1.jpg"
-                        style="background-image: url('dokumentasi1.jpg');">
-                    </div>
-                    <div class="gallery-item" data-src="dokumentasi2.png"
-                        style="background-image: url('dokumentasi2.png');">
-                    </div>
-                </div>
-
-                <div class="contact-actions" style="margin-top: 2rem;">
-                    <a href="https://github.com/Andhyna/Dewarigama" target="_blank" class="btn-contact wa-btn">
-                        <i class="fab fa-github"></i> Lihat Repository
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div id="image-lightbox" class="lightbox">
-            <span class="lightbox-close">&times;</span>
-            <img id="lightbox-img" src="" alt="Enlarged Image">
-        </div>
-
+                </section>
     </main>
 
     <footer class="footer">
-        <div class="container">
-            <div class="footer-inner">
-                <p>&copy; 2026 Demas Darrel Putra Andhyna. Crafted with HTML.</p>
-                <div class="social-links">
-                    <a href="https://github.com/Andhyna"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/demasdarrel/"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://www.instagram.com/dms.drrl_/"><i class="fab fa-instagram"></i></a>
-                </div>
+        <div class="footer-inner">
+            <p>© 2026 Demas Darrel Putra Andhyna</p>
+            <div class="footer-socials">
+                <a href="https://github.com/Andhyna" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/demasdarrel/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/dms.drrl_/" target="_blank"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </footer>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <div class="modal" id="dewarigama-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-box">
+            <button class="modal-close" id="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-tag">Project Detail</div>
+            <h2 class="modal-title">Dewarigama</h2>
+            <p class="modal-text">A romance visual novel developed using Python and the Ren’Py framework for a national
+                competition, featuring a rich narrative and original artwork.</p>
+            <div class="modal-gallery">
+                <div class="gallery-item" data-src="dokumentasi1.jpg"
+                    style="background-image: url('dokumentasi1.jpg');"></div>
+                <div class="gallery-item" data-src="dokumentasi2.png"
+                    style="background-image: url('dokumentasi2.png');"></div>
+            </div>
+            <a href="https://github.com/Andhyna/Dewarigama" target="_blank" class="modal-github">
+                <i class="fab fa-github"></i> Repository
+            </a>
+        </div>
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightbox-close"><i class="fas fa-times"></i></button>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script src="script.js"></script>
 </body>
