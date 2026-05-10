@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. Handle Klik Menu biar URL jadi Clean 
+    // Handle Klik Menu agar URL menjadi Clean 
     document.querySelectorAll('.nav-link, .mobile-link').forEach(link => {
         link.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Handle Auto-scroll berdasarkan URL Path
     const currentPath = window.location.pathname.substring(1);
     if (currentPath && currentPath !== 'index.html') {
         const targetSection = document.getElementById(currentPath);
@@ -27,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // ─── Typed.js ────────────────────────────────────
+    // Animasi Teks Typed.js 
     new Typed('#typed', {
         strings: [
             'Web Developer.',
@@ -41,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cursorChar: '_',
     });
 
-    // ─── Custom Cursor ────────────────────────────────
+    // Kustomisasi Cursor Mouse
     const cursor = document.getElementById('cursor');
 
     if (window.matchMedia('(pointer: fine)').matches) {
@@ -57,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('mouseleave', () => cursor.classList.add('cursor-hidden'));
         document.addEventListener('mouseenter', () => cursor.classList.remove('cursor-hidden'));
 
-        // Smooth cursor with lerp
+        // Fungsi Lerp untuk pergerakan halus cursor
         function lerp(a, b, n) { return (1 - n) * a + n * b; }
 
         function animCursor() {
@@ -70,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         animCursor();
 
-        // Hover state on interactive elements
+        // Efek Hover pada elemen interaktif
         const hoverTargets = document.querySelectorAll(
             'a, button, .project-item, .skill-pill, .gallery-item'
         );
@@ -81,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ─── Navbar Scroll ────────────────────────────────
+    // Efek Transparansi Navbar saat Scroll
     const navbar = document.getElementById('navbar');
 
     const navObserver = new IntersectionObserver(([entry]) => {
@@ -90,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     navObserver.observe(document.getElementById('home'));
 
-    // ─── Hamburger Menu ───────────────────────────────
+    // Navigasi Mobile Hamburger Menu
     const hamburger = document.getElementById('hamburger');
     const mobileNav = document.getElementById('mobile-nav');
 
@@ -99,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileNav.classList.toggle('open');
     });
 
-    // Close mobile nav on link click
+    // Menutup navigasi mobile saat link diklik
     document.querySelectorAll('.mobile-link').forEach(link => {
         link.addEventListener('click', () => {
             hamburger.classList.remove('open');
@@ -107,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ─── Scroll Reveal ────────────────────────────────
+    // Animasi Reveal saat Scroll (Intersection Observer)
     const revealElements = document.querySelectorAll('.reveal, .reveal-up, .reveal-line');
 
     const revealObserver = new IntersectionObserver((entries) => {
@@ -131,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // Trigger hero reveals immediately
+    // Jalankan animasi Reveal khusus Hero section segera
     setTimeout(() => {
         document.querySelectorAll('.hero .reveal, .hero .reveal-up, .hero .reveal-line')
             .forEach(el => {
@@ -142,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }, 100);
 
-    // ─── Modal Logic ──────────────────────────────────
+    // Logika Jendela Modal
     const modal = document.getElementById('dewarigama-modal');
     const modalClose = document.getElementById('modal-close');
     const modalBg = modal.querySelector('.modal-backdrop');
@@ -164,6 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modalClose.addEventListener('click', closeModal);
     modalBg.addEventListener('click', closeModal);
 
+    // Menutup Modal/Lightbox dengan tombol Escape
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeModal();
@@ -171,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ─── Lightbox Logic ───────────────────────────────
+    // Logika Gallery Lightbox (Pop-up Gambar)
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxClose = document.getElementById('lightbox-close');
@@ -205,8 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === lightbox) closeLightbox();
     });
 
-    // ─── Smooth Section Numbers ───────────────────────
-    // Subtle parallax on hero decorative number
+    // Efek Parallax halus pada angka dekorasi Hero
     const heroNum = document.querySelector('.hero-number');
     if (heroNum) {
         window.addEventListener('scroll', () => {
@@ -215,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: true });
     }
 
-    // ─── Active Nav Link Highlighting ─────────────────
+    // Highlighting Link Navigasi Aktif saat Scroll
     const sections = document.querySelectorAll('[id]');
     const navLinks = document.querySelectorAll('.nav-link');
 
