@@ -158,7 +158,7 @@ const spModalClose = document.getElementById('sikapinjam-modal-close');
 const spModalBg = spModal.querySelector('.modal-backdrop');
 const spTrigger = document.getElementById('sikapinjam-trigger');
 
-
+//Dewarigama modal
     function openModal() {
         modal.style.display = 'flex';
         requestAnimationFrame(() => modal.classList.add('open'));
@@ -175,10 +175,28 @@ const spTrigger = document.getElementById('sikapinjam-trigger');
     modalClose.addEventListener('click', closeModal);
     modalBg.addEventListener('click', closeModal);
 
+    // SikaPinjam Modal
+    function openSpModal() {
+        spModal.style.display = 'flex';
+        requestAnimationFrame(() => spModal.classList.add('open'));
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeSpModal() {
+        spModal.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(() => { spModal.style.display = 'none'; }, 500);
+    }
+
+    spTrigger.addEventListener('click', openSpModal);
+    spModalClose.addEventListener('click', closeSpModal);
+    spModalBg.addEventListener('click', closeSpModal);
+
     // Menutup Modal/Lightbox dengan tombol Escape
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeModal();
+            closeSpModal();
             closeLightbox();
         }
     });
