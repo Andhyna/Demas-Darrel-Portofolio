@@ -143,22 +143,29 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }, 100);
 
-    
-// Logika Jendela Modal
 
-// Dewarigama Modal
-const modal = document.getElementById('dewarigama-modal');
-const modalClose = document.getElementById('modal-close');
-const modalBg = modal.querySelector('.modal-backdrop');
-const trigger = document.getElementById('dewarigama-trigger');
+    // Logika Jendela Modal
 
-// SikaPinjam Modal
-const spModal = document.getElementById('sikapinjam-modal');
-const spModalClose = document.getElementById('sikapinjam-modal-close');
-const spModalBg = spModal.querySelector('.modal-backdrop');
-const spTrigger = document.getElementById('sikapinjam-trigger');
+    // Dewarigama Modal
+    const modal = document.getElementById('dewarigama-modal');
+    const modalClose = document.getElementById('modal-close');
+    const modalBg = modal.querySelector('.modal-backdrop');
+    const trigger = document.getElementById('dewarigama-trigger');
 
-//Dewarigama modal
+    // SikaPinjam Modal
+    const spModal = document.getElementById('sikapinjam-modal');
+    const spModalClose = document.getElementById('sikapinjam-modal-close');
+    const spModalBg = spModal.querySelector('.modal-backdrop');
+    const spTrigger = document.getElementById('sikapinjam-trigger');
+
+    // SafeWater Modal
+    const swModal = document.getElementById('safewater-modal');
+    const swModalClose = document.getElementById('safewater-modal-close');
+    const swModalBg = swModal.querySelector('.modal-backdrop');
+    const swTrigger = document.getElementById('safewater-trigger');
+
+
+    // Dewarigama
     function openModal() {
         modal.style.display = 'flex';
         requestAnimationFrame(() => modal.classList.add('open'));
@@ -168,14 +175,13 @@ const spTrigger = document.getElementById('sikapinjam-trigger');
     function closeModal() {
         modal.classList.remove('open');
         document.body.style.overflow = '';
-        setTimeout(() => { modal.style.display = 'none'; }, 500);
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 500);
     }
 
-    trigger.addEventListener('click', openModal);
-    modalClose.addEventListener('click', closeModal);
-    modalBg.addEventListener('click', closeModal);
-
-    // SikaPinjam Modal
+    
+    // SikaPinjam
     function openSpModal() {
         spModal.style.display = 'flex';
         requestAnimationFrame(() => spModal.classList.add('open'));
@@ -185,12 +191,40 @@ const spTrigger = document.getElementById('sikapinjam-trigger');
     function closeSpModal() {
         spModal.classList.remove('open');
         document.body.style.overflow = '';
-        setTimeout(() => { spModal.style.display = 'none'; }, 500);
+        setTimeout(() => {
+            spModal.style.display = 'none';
+        }, 500);
     }
 
-    spTrigger.addEventListener('click', openSpModal);
-    spModalClose.addEventListener('click', closeSpModal);
-    spModalBg.addEventListener('click', closeSpModal);
+
+    // SafeWater
+    function openSwModal() {
+        swModal.style.display = 'flex';
+        requestAnimationFrame(() => swModal.classList.add('open'));
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeSwModal() {
+        swModal.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+            swModal.style.display = 'none';
+        }, 500);
+    }
+
+
+    // Event Listener
+    trigger?.addEventListener('click', openModal);
+    modalClose?.addEventListener('click', closeModal);
+    modalBg?.addEventListener('click', closeModal);
+
+    spTrigger?.addEventListener('click', openSpModal);
+    spModalClose?.addEventListener('click', closeSpModal);
+    spModalBg?.addEventListener('click', closeSpModal);
+
+    swTrigger?.addEventListener('click', openSwModal);
+    swModalClose?.addEventListener('click', closeSwModal);
+    swModalBg?.addEventListener('click', closeSwModal);
 
     // Menutup Modal/Lightbox dengan tombol Escape
     document.addEventListener('keydown', (e) => {
