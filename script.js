@@ -143,11 +143,21 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }, 100);
 
-    // Logika Jendela Modal
-    const modal = document.getElementById('dewarigama-modal');
-    const modalClose = document.getElementById('modal-close');
-    const modalBg = modal.querySelector('.modal-backdrop');
-    const trigger = document.getElementById('dewarigama-trigger');
+    
+// Logika Jendela Modal
+
+// Dewarigama Modal
+const modal = document.getElementById('dewarigama-modal');
+const modalClose = document.getElementById('modal-close');
+const modalBg = modal.querySelector('.modal-backdrop');
+const trigger = document.getElementById('dewarigama-trigger');
+
+// SikaPinjam Modal
+const spModal = document.getElementById('sikapinjam-modal');
+const spModalClose = document.getElementById('sikapinjam-modal-close');
+const spModalBg = spModal.querySelector('.modal-backdrop');
+const spTrigger = document.getElementById('sikapinjam-trigger');
+
 
     function openModal() {
         modal.style.display = 'flex';
